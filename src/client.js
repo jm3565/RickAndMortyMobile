@@ -5,9 +5,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export const charactersQuery = gql`
-  query GetCharactersList {
-    characters {
+export const charactersByPageQuery = gql`
+  query GetCharacters($page: Int!) {
+    characters(page: $page) {
+      info {
+        pages
+        prev
+        next
+      }
       results {
         id
         name
@@ -22,6 +27,12 @@ export const characterQuery = gql`
       id
       name
       image
+      status
+      species
+      gender
+      origin {
+        name
+      }
     }
   }
 `;
